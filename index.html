@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="zh-Hans">
 <head>
   <meta charset="utf-8">
@@ -12,7 +12,7 @@
       --muted: #545454;
       --line: #d8d0c3;
       --soft: #ebe3d6;
-      --accent: #111111;
+      --soft-2: #efe7da;
     }
 
     * {
@@ -28,7 +28,7 @@
       background: var(--paper);
       color: var(--ink);
       font-family: "Inter", "Noto Sans SC", "Microsoft YaHei", Arial, sans-serif;
-      line-height: 1.65;
+      line-height: 1.62;
     }
 
     a {
@@ -47,11 +47,10 @@
       z-index: 10;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 20px;
+      min-height: 72px;
       padding: 18px clamp(22px, 5vw, 72px);
       border-bottom: 1px solid var(--line);
-      background: rgba(246, 241, 232, .9);
+      background: rgba(246, 241, 232, .92);
       backdrop-filter: blur(14px);
     }
 
@@ -61,10 +60,11 @@
     }
 
     .slide {
+      position: relative;
       min-height: calc(100vh - 72px);
       display: grid;
       align-items: center;
-      padding: clamp(56px, 8vw, 96px) clamp(22px, 6vw, 96px);
+      padding: clamp(56px, 8vw, 92px) clamp(22px, 6vw, 96px);
       border-bottom: 1px solid var(--line);
     }
 
@@ -74,11 +74,11 @@
       margin: 0 auto;
     }
 
-    .hero-grid,
-    .split {
+    .split,
+    .hero-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.05fr) minmax(280px, .95fr);
-      gap: clamp(34px, 6vw, 76px);
+      grid-template-columns: minmax(0, 1.02fr) minmax(300px, .98fr);
+      gap: clamp(34px, 6vw, 72px);
       align-items: center;
     }
 
@@ -107,9 +107,9 @@
     }
 
     h2 {
-      max-width: 840px;
+      max-width: 900px;
       margin-bottom: 24px;
-      font-size: clamp(34px, 5vw, 62px);
+      font-size: clamp(34px, 4.9vw, 60px);
       line-height: 1.1;
       letter-spacing: 0;
     }
@@ -121,7 +121,7 @@
     }
 
     .lead {
-      max-width: 760px;
+      max-width: 820px;
       color: var(--ink);
       font-size: clamp(18px, 2vw, 22px);
     }
@@ -130,21 +130,29 @@
       color: var(--muted);
     }
 
-    .hero-product {
-      width: min(78vw, 390px);
-      margin: 0 auto;
-      object-fit: contain;
-      filter: drop-shadow(0 24px 36px rgba(0, 0, 0, .12));
+    .media-card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .58);
     }
 
-    .image-note {
-      max-width: 360px;
-      margin: 20px auto 0;
-      padding-top: 16px;
+    .media-card img {
+      width: 100%;
+      height: min(52vh, 520px);
+      object-fit: cover;
+      background: var(--white);
+    }
+
+    .media-card.contain img {
+      object-fit: contain;
+      padding: 24px;
+      background: var(--white);
+    }
+
+    .caption {
+      padding: 18px 20px 20px;
       border-top: 1px solid var(--line);
-      color: var(--muted);
-      font-size: 15px;
-      text-align: center;
     }
 
     .button-row {
@@ -167,12 +175,34 @@
       font-weight: 800;
     }
 
-    .button.secondary {
-      background: transparent;
-      color: var(--ink);
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 32px;
     }
 
-    .cards {
+    .stat,
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .58);
+    }
+
+    .stat {
+      min-height: 142px;
+      padding: 22px;
+    }
+
+    .stat strong {
+      display: block;
+      margin-bottom: 10px;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1;
+    }
+
+    .cards,
+    .value-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 18px;
@@ -180,32 +210,116 @@
     }
 
     .card {
-      min-height: 210px;
+      min-height: 220px;
       padding: 24px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: rgba(255, 255, 255, .56);
     }
 
     .card strong {
       display: block;
       margin-bottom: 18px;
-      font-size: 36px;
+      font-size: 34px;
+      line-height: 1;
+    }
+
+    .product-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 34px;
+    }
+
+    .product-panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .58);
+      padding: 20px;
+    }
+
+    .product-panel.images {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .product-panel figure {
+      display: grid;
+      place-items: center;
+      margin: 0;
+      min-height: 180px;
+      border-radius: 6px;
+      background: var(--white);
+      padding: 16px;
+    }
+
+    .product-panel img {
+      max-height: 165px;
+      object-fit: contain;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .58);
+    }
+
+    th,
+    td {
+      padding: 15px 16px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: var(--soft);
+      font-size: 15px;
+    }
+
+    tr:last-child th,
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .money-grid {
+      display: grid;
+      grid-template-columns: .86fr 1.14fr;
+      gap: 24px;
+      margin-top: 32px;
+      align-items: start;
+    }
+
+    .ask-box {
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--white);
+    }
+
+    .ask-box strong {
+      display: block;
+      margin-bottom: 12px;
+      font-size: clamp(42px, 6vw, 70px);
       line-height: 1;
     }
 
     .funds {
       display: grid;
-      gap: 14px;
-      margin-top: 10px;
+      gap: 0;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .58);
+      overflow: hidden;
     }
 
     .fund-item {
       display: grid;
-      grid-template-columns: 74px minmax(0, 1fr);
+      grid-template-columns: 78px minmax(0, 1fr);
       gap: 18px;
       align-items: start;
-      padding: 20px 0;
+      padding: 18px 20px;
       border-bottom: 1px solid var(--line);
     }
 
@@ -219,79 +333,56 @@
       line-height: 1;
     }
 
-    .product-strip {
+    .experience-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      padding: 18px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: rgba(255, 255, 255, .5);
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 14px;
+      margin-top: 30px;
     }
 
-    .product-strip figure {
-      margin: 0;
-      padding: 16px;
-      border-radius: 6px;
-      background: var(--white);
-    }
-
-    .product-strip img {
-      height: 170px;
+    .experience-grid img {
       width: 100%;
-      object-fit: contain;
-    }
-
-    .comparison {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-      margin-top: 34px;
-    }
-
-    .compare-card {
-      overflow: hidden;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: rgba(255, 255, 255, .56);
-    }
-
-    .compare-card img {
-      width: 100%;
-      height: min(52vh, 520px);
+      height: 280px;
       object-fit: cover;
+      border: 1px solid var(--line);
+      border-radius: 8px;
       background: var(--white);
     }
 
-    .compare-caption {
-      padding: 18px 20px 20px;
-      border-top: 1px solid var(--line);
-    }
-
-    .value-grid {
+    .support-grid,
+    .risk-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 18px;
       margin-top: 34px;
     }
 
-    .value-card {
+    .support-card,
+    .risk-card {
       min-height: 260px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
       padding: 24px;
       border: 1px solid var(--line);
       border-radius: 8px;
-      background: rgba(255, 255, 255, .56);
+      background: rgba(255, 255, 255, .58);
     }
 
-    .value-card span {
+    .support-card span,
+    .risk-card span {
+      display: block;
+      margin-bottom: 28px;
       color: var(--muted);
       font-size: 13px;
       font-weight: 800;
       letter-spacing: .12em;
       text-transform: uppercase;
+    }
+
+    .quote {
+      margin-top: 34px;
+      padding: 26px;
+      border-left: 4px solid var(--ink);
+      background: rgba(255, 255, 255, .58);
+      font-size: clamp(18px, 2vw, 22px);
     }
 
     .page-tag {
@@ -302,17 +393,17 @@
       font-size: 13px;
     }
 
-    .slide {
-      position: relative;
-    }
-
-    @media (max-width: 900px) {
+    @media (max-width: 920px) {
       .hero-grid,
       .split,
+      .stats,
       .cards,
-      .product-strip,
-      .comparison,
-      .value-grid {
+      .value-grid,
+      .product-row,
+      .money-grid,
+      .experience-grid,
+      .support-grid,
+      .risk-grid {
         grid-template-columns: 1fr;
       }
 
@@ -320,16 +411,35 @@
         min-height: auto;
       }
 
-      .hero-product {
-        width: min(76vw, 300px);
+      .media-card img {
+        height: 340px;
       }
 
-      .product-strip img {
-        height: 130px;
+      .product-panel.images {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
-      .compare-card img {
-        height: 320px;
+      .experience-grid img {
+        height: 240px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .product-panel.images {
+        grid-template-columns: 1fr;
+      }
+
+      table,
+      tbody,
+      tr,
+      th,
+      td {
+        display: block;
+        width: 100%;
+      }
+
+      th {
+        border-bottom: 0;
       }
     }
   </style>
@@ -337,7 +447,7 @@
 <body>
   <nav class="nav">
     <a href="#page-1" aria-label="AURALOOP 首页">
-      <img class="logo" src="https://raw.githubusercontent.com/Shen1789/auraloop-proposal/main/Material/AURALOOP-logo-black-01.png" alt="AURALOOP">
+      <img class="logo" src="Material/AURALOOP-logo-black-01.png" alt="AURALOOP">
     </a>
   </nav>
 
@@ -345,153 +455,237 @@
     <section id="page-1" class="slide">
       <div class="wrap hero-grid">
         <div>
-          <div class="eyebrow">Capital Increase Proposal</div>
-          <h1>AURALOOP <br> 增资企划书</h1>
-          <p class="lead">AURALOOP 是以最前沿科技产品为核心卖点的公司，
-            目前主要合作品牌包含 Hypershell 外骨骼产品线，以及 Nothing 耳机产品线。</p>
-          <p class="lead">这次增资的重点是补齐进货、体验推广、人员执行与门市升级，让更多消费者真正理解并购买产品</p>
-          <div class="button-row">
-            <a class="button" href="#page-2">继续阅读</a>
-            <a class="button secondary" href="#page-3">查看资金用途</a>
+          <div class="eyebrow">01 / Current Status</div>
+          <h1>AURALOOP<br>家庭支持说明</h1>
+          <p class="lead">AURALOOP 是一家在澳洲本地经营的科技产品体验与销售公司，目前主要合作品牌包括 Hypershell 外骨骼产品线，以及 Nothing 耳机产品线。</p>
+          <p class="lead">我们已经有实体门店、真实客户体验、品牌方合作基础。现在最需要的不是重新找方向，而是补足库存与现金流，让已经出现的销售机会能够被接住。</p>
+          <div class="stats">
+            <div class="stat">
+              <strong>1 年</strong>
+              <p class="muted">门店即将满周年，已建立基础展示与体验场域。</p>
+            </div>
+            <div class="stat">
+              <strong>7 型号</strong>
+              <p class="muted">Hypershell 现有与新品型号组合，覆盖不同预算与使用场景。</p>
+            </div>
+            <div class="stat">
+              <strong>认可</strong>
+              <p class="muted">Hypershell 对我们的体验式销售模式有高度信心。</p>
+            </div>
           </div>
         </div>
-        <div>
-          <img class="hero-product" src="https://raw.githubusercontent.com/Shen1789/auraloop-proposal/main/Material/UltraS-%E6%AD%A3%E4%BE%A7.png" alt="Hypershell Ultra S">
-          <p class="image-note">Hypershell S 系列是本次增资的核心进货与推广产品线。</p>
-        </div>
+        <article class="media-card">
+          <img src="Material/店外照片.jpg" alt="AURALOOP 店外照片">
+          <div class="caption">
+            <h3>真实门店，真实经营</h3>
+            <p class="muted">这不是概念项目，而是在澳洲本地持续经营中的科技产品门店。</p>
+          </div>
+        </article>
       </div>
-      <div class="page-tag">01 / 05</div>
+      <div class="page-tag">01 / 06</div>
     </section>
 
     <section id="page-2" class="slide">
       <div class="wrap">
-        <div class="eyebrow">Why Now</div>
-        <h2>外骨骼产品需要让更多人实际体验</h2>
-        <p class="lead">过去半年我们发现，部分顾客看到广告后会直接下单，但更多潜在消费者需要亲自试穿、试走、感受辅助效果。对这类产品来说，体验本身就是最重要的销售环节。</p>
-        <div class="cards">
-          <article class="card">
-            <strong>01</strong>
-            <h3>Hypershell 二代升级明显</h3>
-            <p class="muted">S 系列的体感更直觉、更自然，相比一代更容易让消费者理解产品价值。</p>
-          </article>
-          <article class="card">
-            <strong>02</strong>
-            <h3>规划更多体验机会</h3>
-            <p class="muted">外骨骼产品很难只靠图片说明，现场体验、解说与试用会直接影响转化率。根据澳洲本地的习惯，要更多去社区进行推广</p>
-          </article>
-          <article class="card">
-            <strong>03</strong>
-            <h3>周年是升级窗口</h3>
-            <p class="muted">门市即将满周年，适合用有限预算调整陈列、灯光与视觉，让空间更科技、更极客、更未来。</p>
-          </article>
+        <div class="eyebrow">02 / Why Funding Is Needed</div>
+        <h2>问题不是没有产品或客户，而是现金流太紧，库存很难准备。</h2>
+        <p class="lead">Hypershell 单价高、进货成本高。虽然代理商提供 AUD 25,000 额度，但实际能支撑的库存数量有限。再加上门店固定开支，我们很难同时做好备货、推广和体验活动。</p>
+        <div class="money-grid">
+          <div class="ask-box">
+            <strong>AUD 25,000</strong>
+            <h3>目前最直接的资金缺口</h3>
+            <p class="muted">这笔资金可以帮助我们补足库存与短期周转，避免因为现金流紧张错过销售机会。</p>
+          </div>
+          <table>
+            <tbody>
+              <tr>
+                <th>店租</th>
+                <td>AUD 2,900 / 月</td>
+              </tr>
+              <tr>
+                <th>工资</th>
+                <td>AUD 3,000 / 两周，折算约 AUD 6,500 / 月</td>
+              </tr>
+              <tr>
+                <th>基础固定开支</th>
+                <td>店租 + 工资约 AUD 9,400 / 月，不含广告、进货、运输、平台费用与日常营运。</td>
+              </tr>
+              <tr>
+                <th>理想资金池</th>
+                <td>AUD 100,000 会让我们有余裕做库存、推广、人员执行与更多品牌合作，但不是一次性强制需求。</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+        <div class="quote">我们不希望把目标说得太夸张。最低缺口是 AUD 25,000；如果舅舅愿意支持更完整的成长计划，最高 AUD 100,000 会让公司进入更健康的周转状态。</div>
       </div>
-      <div class="page-tag">02 / 05</div>
+      <div class="page-tag">02 / 06</div>
     </section>
 
     <section id="page-3" class="slide">
+      <div class="wrap">
+        <div class="eyebrow">03 / Product & Margin Logic</div>
+        <h2>Hypershell 是高单价、高体验门槛，但也有明确毛利空间的产品。</h2>
+        <p class="lead">Hypershell 除了新品 S 系列，还有第一代 4 个型号，总共 7 个型号可以销售。目前不同型号单台利润约 AUD 200-600+；新品 S 系列产品力更强，也更适合作为接下来备货与推广重点。</p>
+        <div class="product-row">
+          <table>
+            <tbody>
+              <tr>
+                <th>S 系列售价</th>
+                <th>税前进货价</th>
+                <th>单台毛利空间</th>
+              </tr>
+              <tr>
+                <td>AUD 1,699</td>
+                <td>AUD 1,236</td>
+                <td>约 AUD 463</td>
+              </tr>
+              <tr>
+                <td>AUD 2,499</td>
+                <td>AUD 1,817</td>
+                <td>约 AUD 682</td>
+              </tr>
+              <tr>
+                <td>AUD 3,499</td>
+                <td>AUD 2,472</td>
+                <td>约 AUD 1,027</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="product-panel images">
+            <figure><img src="Material/ProS-正.jpg" alt="Hypershell Pro S"></figure>
+            <figure><img src="Material/UltraS-正.jpg" alt="Hypershell Ultra S"></figure>
+            <figure><img src="Material/MaxS-正.jpg" alt="Hypershell Max S"></figure>
+            <figure><img src="Material/Nothing Hoppip_White_360_00055.png" alt="Nothing 耳机"></figure>
+          </div>
+        </div>
+        <div class="cards">
+          <article class="card">
+            <strong>库存</strong>
+            <h3>现货决定成交速度</h3>
+            <p class="muted">客户有兴趣时，如果没有现货，销售机会很容易被等待时间消耗掉。</p>
+          </article>
+          <article class="card">
+            <strong>体验</strong>
+            <h3>试穿决定理解程度</h3>
+            <p class="muted">外骨骼产品很难只靠图片说明，实际试穿后更容易理解产品价值。</p>
+          </article>
+          <article class="card">
+            <strong>矩阵</strong>
+            <h3>不只依赖单一产品</h3>
+            <p class="muted">Nothing 耳机与未来 AI 硬件产品，会继续补强 AURALOOP 的科技选品矩阵。</p>
+          </article>
+        </div>
+      </div>
+      <div class="page-tag">03 / 06</div>
+    </section>
+
+    <section id="page-4" class="slide">
       <div class="wrap split">
         <div>
-          <div class="eyebrow">Use of Funds</div>
-          <h2>资金优先放在能直接带来销售条件的地方</h2>
+          <div class="eyebrow">04 / Use of Funds</div>
+          <h2>资金优先放在能直接改善销售条件的地方。</h2>
+          <p class="lead">这次资金不是为了大规模装修，也不是为了盲目扩张，而是用于库存、体验推广、人员执行与必要的门店升级，让销售和回款形成循环。</p>
           <div class="funds">
             <article class="fund-item">
               <div class="percent">48%</div>
               <div>
                 <h3>进货与库存深度</h3>
-                <p class="muted">以 Hypershell S 系列为主力备货，避免市场需求起来时无货可卖。</p>
+                <p class="muted">以 Hypershell S 系列与主力型号为重点备货，减少有客户却无货可卖的情况。</p>
               </div>
             </article>
             <article class="fund-item">
               <div class="percent">24%</div>
               <div>
                 <h3>广告与实地体验推广</h3>
-                <p class="muted">增加广告触及、体验场次与导购转化，把「想试试看」推进到「愿意购买」。</p>
+                <p class="muted">增加广告触及、社区体验、预约试穿与现场说明，把兴趣转化成成交。</p>
               </div>
             </article>
             <article class="fund-item">
               <div class="percent">18%</div>
               <div>
                 <h3>人员与活动执行</h3>
-                <p class="muted">增加人员到多点展示、外展推广、现场解说与后续成交追踪。</p>
+                <p class="muted">支持外展、导购、客户回访与后续成交追踪。</p>
               </div>
             </article>
             <article class="fund-item">
               <div class="percent">10%</div>
               <div>
-                <h3>门市科技感升级</h3>
-                <p class="muted">不做大装修，以陈列、灯光、视觉与体验动线提升门市氛围。</p>
+                <h3>门店展示升级</h3>
+                <p class="muted">用更清晰的展陈、灯光、说明与动线提升顾客理解效率。</p>
               </div>
             </article>
           </div>
         </div>
-        <div class="product-strip" aria-label="Hypershell S 系列产品图">
-          <figure><img src="https://raw.githubusercontent.com/Shen1789/auraloop-proposal/main/Material/ProS-%E6%AD%A3.jpg" alt="Hypershell Pro S"></figure>
-          <figure><img src="https://raw.githubusercontent.com/Shen1789/auraloop-proposal/main/Material/UltraS-%E6%AD%A3.jpg" alt="Hypershell Ultra S"></figure>
-          <figure><img src="https://raw.githubusercontent.com/Shen1789/auraloop-proposal/main/Material/MaxS-%E6%AD%A3.jpg" alt="Hypershell Max S"></figure>
-        </div>
+        <article class="media-card">
+          <img src="Material/升級後.png" alt="AURALOOP 升级后展示">
+          <div class="caption">
+            <h3>展示清楚，成交更顺</h3>
+            <p class="muted">升级重点是让产品一目了然，顾客更快理解型号差异，也更方便进入试用流程。</p>
+          </div>
+        </article>
       </div>
-      <div class="page-tag">03 / 05</div>
-    </section>
-
-    <section id="page-4" class="slide">
-      <div class="wrap">
-        <div class="eyebrow">Store Upgrade</div>
-        <h2>店面升级让顾客更快看懂产品，也让试用体验更顺。</h2>
-        <p class="lead">这次升级不是大规模装修，而是用更清晰的展陈、更干净的视觉和更明确的产品说明，让顾客进店后能一眼理解 Hypershell 的产品差异，并更自然地进入试用流程</p>
-        <div class="comparison">
-          <article class="compare-card">
-            <img src="https://raw.githubusercontent.com/Shen1789/auraloop-proposal/main/Material/%E5%8D%87%E7%B4%9A%E5%89%8D.jpg" alt="AURALOOP 店面升级前">
-            <div class="compare-caption">
-              <h3>升级前</h3>
-              <p class="muted">产品信息与展示重点较分散，顾客需要更多口头说明才能理解商品差异。</p>
-            </div>
-          </article>
-          <article class="compare-card">
-            <img src="https://raw.githubusercontent.com/Shen1789/auraloop-proposal/main/Material/%E5%8D%87%E7%B4%9A%E5%BE%8C.png" alt="AURALOOP 店面升级后">
-            <div class="compare-caption">
-              <h3>升级后</h3>
-              <p class="muted">产品墙、灯光、比较表与库存展示更集中，顾客能更直观看到产品线与试用重点。</p>
-            </div>
-          </article>
-        </div>
-      </div>
-      <div class="page-tag">04 / 05</div>
+      <div class="page-tag">04 / 06</div>
     </section>
 
     <section id="page-5" class="slide">
       <div class="wrap">
-        <div class="eyebrow">Upgrade Value</div>
-        <h2>门市升级的目标，是提升理解速度、试用效率与成交信心。</h2>
-        <p class="lead">外骨骼产品需要现场体验。更清楚的展示方式能降低顾客的理解成本，也能让人员把时间集中在试穿、调整、说明使用场景与促成购买上。</p>
-        <div class="value-grid">
-          <article class="value-card">
-            <span>Customer Clarity</span>
-            <div>
-              <h3>产品一目了然</h3>
-              <p class="muted">顾客可以快速看见不同型号、核心差异与适用情境，减少第一时间的陌生感。</p>
-            </div>
+        <div class="eyebrow">05 / Support Options</div>
+        <h2>支持方式由舅舅决定，我们负责把使用和回报讲清楚。</h2>
+        <p class="lead">因为这是家人之间的支持，我们更希望一开始就把方式讲清楚，避免未来因为不好意思谈钱而产生误会。金额、形式和回报方式，我们都可以尊重舅舅的决定。</p>
+        <div class="support-grid">
+          <article class="support-card">
+            <span>Option A</span>
+            <h3>借款</h3>
+            <p class="muted">如果舅舅希望以借款方式支持，我们会把这笔钱视为必须偿还的家庭借款。等销售和现金流稳定后，开始固定还款；如果舅舅希望有回报，也由舅舅提出合理方式。</p>
           </article>
-          <article class="value-card">
-            <span>Display Quality</span>
-            <div>
-              <h3>展陈更清晰干净</h3>
-              <p class="muted">商品从堆放变成展示，门市质感提升，也更符合科技产品应有的专业形象。</p>
-            </div>
+          <article class="support-card">
+            <span>Option B</span>
+            <h3>销售分红</h3>
+            <p class="muted">如果舅舅愿意用类似入股的方式支持，但不以公司名义登记，可以约定每销售一台 Hypershell，从利润中提取一定比例作为回报。</p>
           </article>
-          <article class="value-card">
-            <span>Trial Experience</span>
-            <div>
-              <h3>试用体验更便利</h3>
-              <p class="muted">动线更明确后，人员可以更有效带顾客完成试穿、说明与购买决策。</p>
-            </div>
+          <article class="support-card">
+            <span>Option C</span>
+            <h3>弹性额度</h3>
+            <p class="muted">最低缺口是 AUD 25,000；若舅舅愿意，可设定最高 AUD 100,000 的支持额度，按库存、销售和推广进度分阶段动用。</p>
           </article>
         </div>
+        <div class="experience-grid">
+          <img src="Material/顧客體驗01.jpg" alt="顾客体验 Hypershell">
+          <img src="Material/顧客體驗02.jpg" alt="顾客试用 Hypershell">
+          <img src="Material/顧客體驗03.jpg" alt="门店顾客体验">
+        </div>
       </div>
-      <div class="page-tag">05 / 05</div>
+      <div class="page-tag">05 / 06</div>
+    </section>
+
+    <section id="page-6" class="slide">
+      <div class="wrap">
+        <div class="eyebrow">06 / Risk Control & Long-Term Value</div>
+        <h2>如果情况不如预期，我们会优先保护家人资金安全。</h2>
+        <p class="lead">我们也必须诚实说明，销售不可能完全没有风险。因此资金会分阶段使用，不会一次性压过量库存；若销售速度不如预期，会优先通过体验、租赁、促销和渠道转售回收现金。</p>
+        <div class="risk-grid">
+          <article class="risk-card">
+            <span>Risk Control</span>
+            <h3>分阶段备货</h3>
+            <p class="muted">优先补主力型号，根据实际销售速度继续补货，不盲目囤库存。</p>
+          </article>
+          <article class="risk-card">
+            <span>Fallback</span>
+            <h3>库存仍是资产</h3>
+            <p class="muted">若销售变慢，产品可用于门店试用、社区推广、短期租赁、活动展示或渠道转售。</p>
+          </article>
+          <article class="risk-card">
+            <span>Priority</span>
+            <h3>家人资金优先</h3>
+            <p class="muted">如果采用借款方式，等现金流好转后优先安排还款，而不是继续扩大风险。</p>
+          </article>
+        </div>
+        <div class="quote">Hypershell 对 AURALOOP 的运营模式非常认可，并已考虑将我们的体验式销售与本地推广方法复制到其他国家市场。对我们来说，这不只是销售合作，而是来自品牌方的长期信任与外部背书。</div>
+        <p class="lead">长期来看，AURALOOP 不只是卖单一产品。Hypershell 外骨骼、Nothing 耳机、未来 AI 硬件，以及 TGA / 医疗相关路径，都会让我们有机会发展成更完整的澳洲科技产品体验渠道。</p>
+      </div>
+      <div class="page-tag">06 / 06</div>
     </section>
   </main>
 </body>
 </html>
-
-
